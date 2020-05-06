@@ -27,10 +27,9 @@ def differencePopulation(df, annee, element1, code1, element2, code2, code3, mul
     """
         Prend un Data Frame et une année, deux colonnes (element1 et element2) et leurs types d'informations dans la colonne
         (code1 et code2). 
-        Le premier element-code est pour choisir la population, le deuxième element-code est pour choisir le pays.*
-        code3 est une liste pour une liste de pays pour faire la comparaison
-        multiplicateur permet la conversion d'unité, ici de milliers de personnes à 1 personne
-        retourne un string
+        Le premier element-code est pour choisir la population, le deuxième element-code est pour choisir le pays.
+        code3 est une liste pour une liste de pays pour faire la comparaison multiplicateur permet la conversion d'unité, 
+        ici de milliers de personnes à 1 personne retourne un string
     """
     somme1 = sommeSerie(df, annee, element1, code1, 0, multiplicateur, element2, code2)
     somme2 = sommeSerie(df, annee, element1, code1, 0, multiplicateur, element2, code3)
@@ -64,7 +63,8 @@ def retourneLigne(df, annee, parametre):
 def retourneValeur(df, annee, parametre, valeur):
     """
         permet de retourner une valeur d'une ligne d'une Data Frame. Prend le Data Frame et l'année
-        Parametre est un dictionnaire pour la selection de la ligne de la Data Frame et une colonne (valeur) pour retourner sa valeur
+        Parametre est un dictionnaire pour la selection de la ligne de la Data Frame et une colonne (valeur) pour retourner sa
+        valeur
     """
     return retourneLigne(df, annee, parametre)[valeur].values
 
@@ -86,8 +86,10 @@ def retourneValeurs(df, annee, parametre, element, codes, valeur):
         
 def ajoutLigne(df, element, code, nouveauElement, nouveauCode, nouveauUnite, colonne, multiplicateur = 1, avec = 'Zone', comment = 'left', operation = 'multiplication'):
     """
-        permet de rajouter des lignes à la Data Frame. La valeur provient d'une opération entre les valeurs deux deux autres lignes
-        Cette fonction merge deux colonnes, fais une operation entre les deux valeurs mergées, et retourne la Data Frame avec les nouvelles
+        Permet de rajouter des lignes à la Data Frame. La valeur provient d'une opération entre les valeurs deux deux autres
+        lignes
+        Cette fonction merge deux colonnes, fais une operation entre les deux valeurs mergées, et retourne la Data Frame avec
+        les nouvelles
         lignes
         Cette fonction prend une Data Frame
     """
@@ -146,7 +148,9 @@ def calculNourriturePersonne(df, annee, element, veg = 0, jour = 0):
         
 def calculNourriture(df, annee):
     """
-        
+        Permet de calculer le résultat de la question 8 en additionnant les 3 composants Food, Feed et Waste
+        Il renvoie un string formaté comprenant les réponses. Il s'appuie sur la fonction calculNourriturePersonne pour le
+        renvoyer.
     """
     codeElementFood = 5142
     codeElementFeed = 5521
@@ -161,7 +165,7 @@ def calculNourriture(df, annee):
     nouveauUniteFoodFeed = 'Milliers de Kg'
     nouveauCodeFoodFeed = 9142
     
-    df = ajoutLigne(df, 'Code Élément', codeAddFoodFeed, nouveauElementFoodFeed, nouveauCodeFoodFeed, nouveauUniteFoodFeed, colonne, 1, avec, 'left', 'add')
+    df = ajoutLigne(df, 'Code Élément', codeAddFoodFeed, nouveauElementFoodFeed, nouveauCodeFoodFeed, nouveauUniteFoodFeed, colonne, 1000, avec, 'left', 'add')
     
     codeAddFoodFeedWaste = (nouveauCodeFoodFeed, codeElementWaste)
 
@@ -169,7 +173,7 @@ def calculNourriture(df, annee):
     nouveauUniteFoodFeedWaste = 'Milliers de Kg'
     nouveauCodeFoodFeedWaste = 9143
 
-    multiplicateurFoodFeedWaste = 1000000
+    multiplicateurFoodFeedWaste = 1000
     
     df = ajoutLigne(df, 'Code Élément', codeAddFoodFeedWaste, nouveauElementFoodFeedWaste, nouveauCodeFoodFeedWaste, nouveauUniteFoodFeedWaste, colonne, multiplicateurFoodFeedWaste, avec, 'left', 'add')
     
@@ -188,7 +192,8 @@ def calculNourriture(df, annee):
 
 def creatLigneRatio(df, code, energie, proteine, multiplicateur = 1):
     """
-         Permet de créer un ratio de la question 
+         Permet de créer deux lignes ratio pour calculer selon une ligne donnée les ratios Energie 9684 et Proteine 9694
+         Il retourne la data Frame avec les nouvelles lignes de ratios
     """
     codeElementRatioEnergie = 9684
     codeElementRatioProteine = 9694
